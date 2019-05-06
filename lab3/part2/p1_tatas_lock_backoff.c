@@ -12,12 +12,12 @@ long g_cuenta = 0;
 volatile unsigned long lock=0;
 
 void acquire_lock(){
-    int delay = rand() % 4096;
+    int delay = 1;
     
     while (1){
         while (lock==1); // spin
         if (!tas(&lock)) return; // lock acquired
-        backoff(&delay); // max=4096, delay won't be greatee than 4096*2
+        backoff(&delay); // max=4096, delay won't be greater than 4096*2
     }
 }
 
@@ -56,8 +56,8 @@ int main(int argc, char const *argv[])
 
     for (int i=0; i<npruebas; ++i){
         secs_hr = gethrtime_x86();
-        for (int i=0; i<N; ++i) pthread_create(&hilos[i], NULL, increment, NULL);
-        for (int i=0; i<N; ++i) pthread_join(hilos[i], NULL);
+        for (int i=0; i<nhilos; ++i) pthread_create(&hilos[i], NULL, increment, NULL);
+        for (int i=0; i<nhilos; ++i) pthread_join(hilos[i], NULL);
 
         secs_hr_prom += gethrtime_x86()-secs_hr;
     }
