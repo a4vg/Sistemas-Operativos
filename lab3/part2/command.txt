@@ -1,0 +1,1 @@
+g++ -pthread hrtimer_x86.c -march=x86-64 atomic_ops.h main.c
