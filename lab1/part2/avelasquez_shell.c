@@ -153,7 +153,7 @@ int main(int argc, char const *argv[])
                 else execvp(args[0], args);
                 break;
             case 7:
-                exit()
+                exit(0);
             default:
                 perror("[ERROR] Invalid command");
         }
